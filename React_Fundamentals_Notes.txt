@@ -15,3 +15,15 @@ https://github.com/udacity/reactnd-contacts-server2
 cd0295-reactnd-contacts-server
 Main: https://github.com/jamesperrin/cd0295-reactnd-contacts-server
 Upstream: https://github.com/udacity/cd0295-reactnd-contacts-server
+
+
+To use PropTypes in our app, we need to install prop-types(opens in a new tab):
+
+npm install --save prop-types
+
+Setting Up TypeScript 6.0 With React
+Getting started with TypeScript 6.0 in your React project is straightforward:
+https://markaicode.com/typescript-6-annotations-vs-react-proptypes/
+
+Installation
+npm install typescript@6.0 @types/react @types/react-dom --save-dev
