@@ -1,0 +1,17 @@
+React-Fundamentals-C1-React-Contacts
+https://github.com/udacity/React-Fundamentals-C1-React-Contacts/tree/main
+
+This repo is a code-along with the in-course project in the React Nanodegree program.
+
+React-Fundamentals-Exercises
+https://github.com/udacity/React-Fundamentals-Exercises
+Workspace Exercises for React Fundamentals
+This repo contains the code for the in-class Workspace exercises
+
+Backend Servers
+reactnd-contacts-server2 (archived on Jun 28, 2022)
+https://github.com/udacity/reactnd-contacts-server2
+
+cd0295-reactnd-contacts-server
+Main: https://github.com/jamesperrin/cd0295-reactnd-contacts-server
+Upstream: https://github.com/udacity/cd0295-reactnd-contacts-server
