@@ -27,3 +27,14 @@ https://markaicode.com/typescript-6-annotations-vs-react-proptypes/
 
 Installation
 npm install typescript@6.0 @types/react @types/react-dom --save-dev
+
+
+Further Research
+Built-in React Hooks(opens in a new tab) in the React documentation
+https://react.dev/reference/react/hooks
+
+Built-in React DOM Hooks(opens in a new tab) in the React documentation
+https://react.dev/reference/react-dom/hooks
+
+Hooks Quickstart(opens in a new tab) in the React documentation
+https://react.dev/learn#using-hooks
