@@ -30,3 +30,34 @@
     transform: rotate(360deg);
   }
 }
+
+.users-list {
+  width: 25vw;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.hide {
+  border: 1px solid red;
+  display: none;
+}
+
+.form-button-adduser {
+  margin-top: 5px;
+}
+
+.form-error {
+  color: red;
+  font-weight: bold;
+  width: 25vw;
+  margin: 10px auto;
+}
+
+.form-wrapper {
+  width: 30vw;
+  margin: 10px auto;
+}
+
+.form-wrapper fieldset {
+  border-radius: 10px;
+}
