@@ -1,33 +1,42 @@
-import { useState } from 'react';
-import config from './config/config';
+import { useState, useEffect } from 'react';
 import './App.css';
 import ListContacts from './components/ListContacts';
-
-const contactsData = [
-  {
-    id: 'karen',
-    name: 'Karen Isgrigg',
-    handle: 'karen_isgrigg',
-    avatarURL: `${config.apiURL}/karen.jpg`,
-  },
-  {
-    id: 'richard',
-    name: 'Richard Kalehoff',
-    handle: 'richardkalehoff',
-    avatarURL: `${config.apiURL}/richard.jpg`,
-  },
-  {
-    id: 'tyler',
-    name: 'Tyler McGinnis',
-    handle: 'tylermcginnis',
-    avatarURL: `${config.apiURL}/tyler.jpg`,
-  },
-];
+import ContactsAPI from './utils/ContactsAPI';
 
 const App = () => {
-  const [contacts, setContacts] = useState(contactsData);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const getContacts = async () => {
+      try {
+        const res = await ContactsAPI.getAllAsync();
+
+        if (isMounted) {
+          setContacts(res || []);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setContacts([]);
+        }
+
+        console.error('-- Failed to fetch contacts:');
+        console.error(error);
+      }
+    };
+
+    getContacts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const removeContact = (contact) => {
+    // ContactsAPI.remove(contact);
+    // ContactsAPI.removeById(contact.id);
+    ContactsAPI.removeByIdAsync(contact.id);
     setContacts(contacts.filter((c) => c.id !== contact.id));
   };
 

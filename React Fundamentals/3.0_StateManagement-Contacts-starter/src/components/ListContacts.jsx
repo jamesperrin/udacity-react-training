@@ -32,7 +32,9 @@ const ListContacts = ({ contacts, onDeleteContact }) => {
           <span>
             Now showing {showingContacts.length} of {contacts.length}
           </span>
-          <button onClick={() => clearQuery()}>Show all</button>
+          <button type="button" onClick={() => clearQuery()}>
+            Show all
+          </button>
         </div>
       )}
 

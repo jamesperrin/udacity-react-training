@@ -11,17 +11,45 @@ const headers = {
 };
 
 export const getAll = () =>
-  fetch(`${config.apiURL}/contacts`, { headers })
+  fetch(`${config.origin}/contacts`, { headers })
     .then((res) => res.json())
     .then((data) => data.contacts);
 
-export const remove = (contact) =>
-  fetch(`${config.apiURL}/contacts/${contact.id}`, { method: 'DELETE', headers })
+export const getAllAsync = async () => {
+  const res = await fetch(`${config.origin}/contacts`, { headers });
+  const data = await res.json();
+  return data.contacts;
+};
+
+export const getById = (id) =>
+  fetch(`${config.origin}/contacts/${id}`, { method: 'GET', headers })
     .then((res) => res.json())
     .then((data) => data.contact);
 
+export const getByIdAsync = async (id) => {
+  const res = await fetch(`${config.origin}/contacts/${id}`, { method: 'GET', headers });
+  const data = await res.json();
+  return data.contact;
+};
+
+export const remove = (contact) =>
+  fetch(`${config.origin}/contacts/${contact.id}`, { method: 'DELETE', headers })
+    .then((res) => res.json())
+    .then((data) => data.contact);
+
+export const removeById = (id) =>
+  fetch(`${config.origin}/contacts/${id}`, { method: 'DELETE', headers })
+    .then((res) => res.json())
+    .then((data) => data.contact);
+
+export const removeByIdAsync = async (id) => {
+  const res = await fetch(`${config.origin}/contacts/${id}`, { method: 'DELETE', headers });
+  const data = await res.json();
+  return data.contact;
+};
+
 export const create = (body) =>
-  fetch(`${config.apiURL}/contacts`, {
+  fetch(`${config.origin}/contacts`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -29,3 +57,14 @@ export const create = (body) =>
     },
     body: JSON.stringify(body),
   }).then((res) => res.json());
+
+export default {
+  getAll,
+  getAllAsync,
+  getById,
+  getByIdAsync,
+  remove,
+  removeById,
+  removeByIdAsync,
+  create,
+};
