@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import Contact from './Contact';
 
 const ListContacts = ({ contacts, onDeleteContact }) => {
   const [query, setQuery] = useState('');
@@ -40,20 +41,7 @@ const ListContacts = ({ contacts, onDeleteContact }) => {
 
       <ol className="contact-list">
         {showingContacts.map((contact) => (
-          <li key={contact.id} className="contact-list-item">
-            <div
-              className="contact-avatar"
-              style={{
-                backgroundImage: `url(${contact.avatarURL})`,
-              }}></div>
-            <div className="contact-details">
-              <p>{contact.name}</p>
-              <p>{contact.handle}</p>
-            </div>
-            <button className="contact-remove" onClick={() => onDeleteContact(contact)}>
-              Remove
-            </button>
-          </li>
+          <Contact key={contact.id} contact={contact} onDeleteContact={onDeleteContact} />
         ))}
       </ol>
     </div>
