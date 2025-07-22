@@ -38,3 +38,9 @@ https://react.dev/reference/react-dom/hooks
 
 Hooks Quickstart(opens in a new tab) in the React documentation
 https://react.dev/learn#using-hooks
+
+Using the Effect Hook
+https://legacy.reactjs.org/docs/hooks-effect.html
+
+Understanding useEffect: the dependency array
+https://dev.to/rozenmd/understanding-useeffect-the-dependency-array-obg
