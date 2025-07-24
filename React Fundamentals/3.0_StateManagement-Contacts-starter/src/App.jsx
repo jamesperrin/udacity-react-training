@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import ListContacts from './components/ListContacts';
 import CreateContact from './components/CreateContact';
@@ -6,7 +7,6 @@ import ContactsAPI from './utils/ContactsAPI';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
-  const [screen, setScreen] = useState('list');
 
   useEffect(() => {
     let isMounted = true;
@@ -43,18 +43,10 @@ const App = () => {
   };
 
   return (
-    <div>
-      {screen === 'list' && (
-        <ListContacts
-          contacts={contacts}
-          onDeleteContact={removeContact}
-          onNavigate={() => {
-            setScreen('create');
-          }}
-        />
-      )}
-      {screen === 'create' && <CreateContact />}
-    </div>
+    <Routes>
+      <Route path="/" exact element={<ListContacts contacts={contacts} onDeleteContact={removeContact} />} />
+      <Route path="/create" element={<CreateContact />} />
+    </Routes>
   );
 };
 

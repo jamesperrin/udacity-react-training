@@ -1,5 +1,12 @@
+import { Link } from 'react-router-dom';
+
 const CreateContact = () => {
-  return <div>Create Contact</div>;
+  return (
+    <div>
+      <div>Create Contact</div>
+      <Link to="/">Cancel</Link>
+    </div>
+  );
 };
 
 export default CreateContact;
