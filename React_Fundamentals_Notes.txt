@@ -44,3 +44,9 @@ https://legacy.reactjs.org/docs/hooks-effect.html
 
 Understanding useEffect: the dependency array
 https://dev.to/rozenmd/understanding-useeffect-the-dependency-array-obg
+
+Install React Router
+To use React Router in our app, we need to install react-router-dom.
+https://www.npmjs.com/package/react-router-dom
+
+npm install --save react-router-dom
