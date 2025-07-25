@@ -58,6 +58,18 @@ export const create = (body) =>
     body: JSON.stringify(body),
   }).then((res) => res.json());
 
+export const createAsync = async (body) => {
+  const res = await fetch(`${config.origin}/contacts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  return await res.json();
+};
+
 export default {
   getAll,
   getAllAsync,
@@ -67,4 +79,5 @@ export default {
   removeById,
   removeByIdAsync,
   create,
+  createAsync,
 };
