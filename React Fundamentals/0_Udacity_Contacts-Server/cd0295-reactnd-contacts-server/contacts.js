@@ -54,7 +54,11 @@ const getById = (token, id) => {
 
 const add = (token, contact) => {
   if (!contact.id) {
-    contact.id = Math.random().toString(36).substr(-8);
+    // Old code which is not cryptographically secure.
+    // contact.id = Math.random().toString(36).substr(-8);
+
+    // Modern code which uses crypto for stronger randomness.
+    contact.id = crypto.randomUUID();
   }
 
   get(token).contacts.push(contact);

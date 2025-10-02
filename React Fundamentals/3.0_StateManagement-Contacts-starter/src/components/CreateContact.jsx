@@ -4,7 +4,7 @@ import serializeForm from 'form-serialize';
 import PropTypes from 'prop-types';
 
 const CreateContact = ({ onCreateContact }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +17,7 @@ const CreateContact = ({ onCreateContact }) => {
 
   return (
     <div>
-      <div>Create Contact</div>
+      <h1>Create Contact</h1>
 
       <Link to="/" className="close-create-contact">
         Close

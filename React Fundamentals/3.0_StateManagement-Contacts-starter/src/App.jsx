@@ -7,7 +7,7 @@ import ContactsAPI from './utils/ContactsAPI';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;

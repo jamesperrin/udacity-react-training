@@ -3,7 +3,13 @@ import config from '../config/config';
 
 let token = localStorage.token;
 
-if (!token) token = localStorage.token = Math.random().toString(36).substr(-8);
+if (!token) {
+  // Old code which is not cryptographically secure.
+  // token = localStorage.token = Math.random().toString(36).substr(-8);
+
+  // Modern code which uses crypto for stronger randomness.
+  token = localStorage.token = crypto.randomUUID();
+}
 
 const headers = {
   Accept: 'application/json',
