@@ -23,10 +23,16 @@ const CreateContact = ({ onCreateContact }) => {
         Close
       </Link>
       <form className="create-contact-form" onSubmit={handleSubmit}>
-        <ImageInput className="create-contact-avatar-input" name="avatarURL" id="avatarURL" maxHeight={64} />
+        <ImageInput
+          className="create-contact-avatar-input"
+          name="avatarURL"
+          id="avatarURL"
+          maxHeight={64}
+          required={true}
+        />
         <div className="create-contact-details">
-          <input type="text" name="name" id="name" placeholder="Name" aria-label="Name" />
-          <input type="text" name="handle" id="handle" placeholder="Handle" aria-label="Handle" />
+          <input type="text" name="name" id="name" placeholder="Name" aria-label="Name" required />
+          <input type="text" name="handle" id="handle" placeholder="Handle" aria-label="Handle" required />
           <button
             type="submit"
             className="create-contact-details-btn create-contact-details-btn__add"

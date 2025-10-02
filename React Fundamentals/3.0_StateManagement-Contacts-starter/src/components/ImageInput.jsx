@@ -41,7 +41,7 @@ const resizeImage = (imageURL, canvas, maxHeight) =>
  * submitting them to the server as data URLs. Also, shows a preview of the image.
  */
 
-const ImageInput = ({ maxHeight, className, name, id }) => {
+const ImageInput = ({ maxHeight, className, name, id, required }) => {
   let fileInput;
 
   const [value, setValue] = useState('');
@@ -89,11 +89,12 @@ const ImageInput = ({ maxHeight, className, name, id }) => {
 
   return (
     <div className={className} style={style}>
-      <input type="hidden" name={name} id={id} value={value} />
+      <input type="hidden" name={name} id={id} required={required} value={value} />
       <input
         ref={(node) => (fileInput = node)}
         type="file"
         onChange={handleFileChange}
+        required={required}
         style={{
           position: 'absolute',
           top: 0,
@@ -112,6 +113,7 @@ ImageInput.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   maxHeight: PropTypes.number,
+  required: PropTypes.bool,
 };
 
 export default ImageInput;
