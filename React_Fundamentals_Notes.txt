@@ -54,3 +54,23 @@ npm install --save react-router-dom
 Serialize the Form Data
 
 npm install --save form-serialize
+
+Final Project MyReads - A Book Tracking App
+
+Project Overview
+In the MyReads project, you'll create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. The project emphasizes using React to build the application and provides an API server and client library that you will use to persist information as you interact with the application.
+
+Submission Requirements
+Your submission should include all of the files necessary to install and launch your web application on a local web server. For files that include JSX, please refrain from using the .jsx extension (you can prefer .js). You can assume that your reviewer will have npm installed on their machine.
+
+Even if you don't end up using the starter code(opens in a new tab), you should probably still use Create React App(opens in a new tab) to generate your submission since it's the easiest way to ensure you have everything the project reviewer will need to install and run your app.
+
+  nd0191-c1-myreads
+  https://github.com/udacity/nd0191-c1-myreads/
+
+Considerations
+The focus of this project is on writing functional React code, not on making the page beautiful. Feel free to spend some time working on your layout and CSS if you want to, but the goal for this project is correct functionality.
+
+# npm 7+, extra double-dash is needed:
+npm create vite@latest my-react-app -- --template react
+npm create vite@latest udacity-myreads-project -- --template react
