@@ -54,25 +54,26 @@ export const removeByIdAsync = async (id) => {
   return data.contact;
 };
 
-export const create = (body) =>
+export const create = (contact) =>
   fetch(`${config.origin}/contacts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(contact),
   }).then((res) => res.json());
 
-export const createAsync = async (body) => {
+export const createAsync = async (contact) => {
   const res = await fetch(`${config.origin}/contacts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(contact),
   });
+
   return await res.json();
 };
 

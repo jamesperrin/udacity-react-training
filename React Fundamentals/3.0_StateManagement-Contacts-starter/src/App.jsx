@@ -47,6 +47,7 @@ const App = () => {
     const addContact = async () => {
       // const res = await ContactsAPI.create(contact);
       const res = await ContactsAPI.createAsync(contact);
+
       // setContacts(contacts.concat(res));
       setContacts([...contacts, res]);
     };
