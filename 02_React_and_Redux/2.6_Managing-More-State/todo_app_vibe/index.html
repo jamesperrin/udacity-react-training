@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>To-Do List</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="app" aria-labelledby="app-title">
+        <h1 id="app-title">To‑Do List</h1>
+
+        <form id="todo-form" autocomplete="off">
+            <label for="new-todo" class="sr-only">New to-do</label>
+            <input id="new-todo" name="new-todo" type="text" placeholder="What needs to be done?" required />
+            <button type="submit" aria-label="Add to-do">Add</button>
+        </form>
+
+        <section class="toolbar">
+            <div class="filters" role="radiogroup" aria-label="Filter todos">
+                <button type="button" data-filter="all" class="filter active" aria-pressed="true">All</button>
+                <button type="button" data-filter="active" class="filter" aria-pressed="false">Active</button>
+                <button type="button" data-filter="completed" class="filter" aria-pressed="false">Completed</button>
+            </div>
+            <div class="bulk-actions">
+                <button id="clear-completed" type="button">Clear Completed</button>
+            </div>
+        </section>
+
+        <ul id="todo-list" aria-live="polite"></ul>
+
+        <footer class="status-bar">
+            <span id="remaining-count">0 items left</span>
+            <button id="export-json" type="button">Export JSON</button>
+            <input id="import-file" type="file" accept="application/json" hidden />
+            <button id="import-json" type="button">Import JSON</button>
+        </footer>
+    </main>
+
+    <template id="todo-item-template">
+        <li class="todo-item">
+            <div class="view">
+                <input class="toggle" type="checkbox" />
+                <label class="todo-text"></label>
+                <div class="actions">
+                    <button class="edit-btn" type="button" aria-label="Edit">✏️</button>
+                    <button class="delete-btn" type="button" aria-label="Delete">🗑️</button>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <script src="app.js" type="module"></script>
+</body>
+
+</html>
