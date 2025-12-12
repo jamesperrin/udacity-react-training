@@ -74,3 +74,12 @@ The focus of this project is on writing functional React code, not on making the
 # npm 7+, extra double-dash is needed:
 npm create vite@latest my-react-app -- --template react
 npm create vite@latest udacity-myreads-project -- --template react
+
+
+On your own mental challenge
+Read these articles:
+The what and why of Redux
+https://blog.pusher.com/the-what-and-why-of-redux/
+
+Leveling Up with React: Redux
+https://css-tricks.com/learning-react-redux/
