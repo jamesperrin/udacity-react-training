@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Udacity Todos Goals</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.2/redux.min.js"></script>
+</head>
+
+<body>
+    <!--
+    Section: 4.3 Exercise Middleware
+
+    cd0547-React-Redux-TODO-GOALS-project/index.html
+
+    -->
+
+    <div>
+        <h1>Todo List</h1>
+        <input id="todo" type="text" placeholder="Add Todo" />
+        <button id="todoBtn">Add Todo</button>
+        <ul id="todos"></ul>
+    </div>
+
+    <div>
+        <h1>Goals</h1>
+        <input id="goal" type="text" placeholder="Add Goal" />
+        <button id="goalBtn">Add Goal</button>
+        <ul id="goals"></ul>
+    </div>
+
+    <script type="text/javascript">
+        function generateId() {
+            if (window.crypto) {
+                return crypto.randomUUID();
+            } else {
+                return Math.random().toString(36).substring(2) + new Date().getTime().toString(36);
+            }
+        }
+
+        // App Code - Reducer function
+        const actions = {
+            ADD_TODO: 'ADD_TODO',
+            REMOVE_TODO: 'REMOVE_TODO',
+            TOGGLE_TODO: 'TOGGLE_TODO',
+            ADD_GOAL: 'ADD_GOAL',
+            REMOVE_GOAL: 'REMOVE_GOAL',
+            TOGGLE_GOAL: 'TOGGLE_GOAL',
+        };
+
+        function addTodoAction(todo) {
+            return {
+                type: actions.ADD_TODO,
+                todo,
+            };
+        }
+
+        function removeTodoAction(id) {
+            return {
+                type: actions.REMOVE_TODO,
+                id,
+            };
+        }
+
+        function toggleTodoAction(id) {
+            return {
+                type: actions.TOGGLE_TODO,
+                id,
+            };
+        }
+
+        function addGoalAction(goal) {
+            return {
+                type: actions.ADD_GOAL,
+                goal,
+            };
+        }
+
+        function removeGoalAction(id) {
+            return {
+                type: actions.REMOVE_GOAL,
+                id,
+            };
+        }
+
+        function toggleGoalAction(id) {
+            return {
+                type: actions.TOGGLE_GOAL,
+                id,
+            };
+        }
+
+        // Here's the commit with the changes made in this video.
+        function todos(state = [], action) {
+            switch (action.type) {
+                case actions.ADD_TODO:
+                    return state.concat([action.todo]);
+                case actions.REMOVE_TODO:
+                    return state.filter((todo) => todo.id !== action.id);
+                case actions.TOGGLE_TODO:
+                    return state.map((todo) =>
+                        todo.id !== action.id ? todo : Object.assign({}, todo, { complete: !todo.complete }),
+                    );
+                default:
+                    return state;
+            }
+        }
+
+        // Here's the commit with the changes made in this video.
+        function goals(state = [], action) {
+            switch (action.type) {
+                case actions.ADD_GOAL:
+                    return state.concat([action.goal]);
+                case actions.REMOVE_GOAL:
+                    return state.filter((goal) => goal.id !== action.id);
+                case actions.TOGGLE_GOAL:
+                    return state.map((goal) =>
+                        goal.id !== action.id ? goal : Object.assign({}, goal, { complete: !goal.complete }),
+                    );
+                default:
+                    return state;
+            }
+        }
+
+        /*
+            ES5 Syntax
+
+            function checker2(store) {
+                return function wrapDispatch(next) {
+                    return function handleAction(action) {
+                        if (action.type === actions.ADD_TODO && action.todo.name.toLowerCase().includes('bitcoin')
+                        ) {
+                            return alert("Nope. That's a bad idea.");
+                        }
+
+                        if (action.type === actions.ADD_GOAL && action.goal.name.toLowerCase().includes('bitcoin')
+                        ) {
+                            return alert("Nope. That's a bad idea.");
+                        }
+
+                        return next(action);
+                    };
+                };
+            }
+        */
+
+        // ES6 Syntax
+        const checker = (store) => (next) => (action) => {
+            if (action.type === actions.ADD_TODO && action.todo.name.toLowerCase().includes('bitcoin')) {
+                return alert("Nope. That's a bad idea.");
+            }
+
+            if (action.type === actions.ADD_GOAL && action.goal.name.toLowerCase().includes('bitcoin')) {
+                return alert("Nope. That's a bad idea.");
+            }
+
+            return next(action);
+        };
+
+        const logger = (store) => (next) => (action) => {
+            console.group(action.type);
+
+            console.log('Prev state:', store.getState());
+            console.log('The action: ', action);
+
+            const result = next(action);
+            const nextState = store.getState();
+            console.log('The new state: ', nextState);
+
+            console.groupEnd();
+
+            return result;
+        };
+
+        const displayAlert = (store) => (next) => (action) => {
+            if (action.type === actions.ADD_TODO) {
+                alert(`Don't forget to ${action.todo.name}!`);
+            }
+
+            if (action.type === actions.ADD_GOAL) {
+                alert("That's a great goal!");
+            }
+
+            return next(action);
+        };
+
+        const store = Redux.createStore(Redux.combineReducers({
+            todos,
+            goals,
+        }), Redux.applyMiddleware(checker, logger, displayAlert));
+
+        store.subscribe(() => {
+            const { goals, todos } = store.getState();
+
+            document.getElementById("goals").innerHTML = "";
+            document.getElementById("todos").innerHTML = "";
+
+            goals.forEach(addGoalToDOM);
+            todos.forEach(addTodoToDOM);
+        });
+
+        // DOM code
+        function createRemoveButton(onClick) {
+            const removeBtn = document.createElement("button");
+            removeBtn.innerHTML = "X";
+            removeBtn.title = "Delete item";
+            removeBtn.style.marginLeft = "5px";
+            removeBtn.style.color = "#fff";
+            removeBtn.style.background = "rgba(220,53,69)";
+            removeBtn.style.border = "none";
+            removeBtn.style.borderRadius = "25%";
+            removeBtn.addEventListener("click", onClick);
+            return removeBtn;
+        }
+
+        function addTodo() {
+            const input = document.getElementById("todo");
+            const name = input.value;
+            input.value = "";
+
+            store.dispatch(
+                addTodoAction({
+                    name,
+                    complete: false,
+                    id: generateId(),
+                })
+            );
+        }
+
+        function addGoal() {
+            const input = document.getElementById("goal");
+            const name = input.value;
+            input.value = "";
+
+            store.dispatch(
+                addGoalAction({
+                    id: generateId(),
+                    name,
+                })
+            );
+        }
+
+        document.getElementById("todoBtn").addEventListener("click",
+            function () { addTodo(); }
+        );
+
+        document.getElementById("goalBtn").addEventListener("click", function () {
+            addGoal();
+        });
+
+        function addTodoToDOM(todo) {
+            if (!todo.name) {
+                return;
+            }
+
+            const node = document.createElement("li");
+            const text = document.createTextNode(todo.name);
+
+            const removeBtn = createRemoveButton(() => {
+                store.dispatch(removeTodoAction(todo.id));
+            });
+
+            node.appendChild(text);
+            node.appendChild(removeBtn);
+            node.style.textDecoration = todo.complete ? "line-through" : "none";
+            node.addEventListener("click", () => {
+                store.dispatch(toggleTodoAction(todo.id));
+            });
+
+            document.getElementById("todos").appendChild(node);
+        }
+
+        function addGoalToDOM(goal) {
+            if (!goal.name) {
+                return;
+            }
+            const node = document.createElement("li");
+            const text = document.createTextNode(goal.name);
+            const removeBtn = createRemoveButton(() => {
+                store.dispatch(removeGoalAction(goal.id));
+            });
+
+            node.appendChild(text);
+            node.appendChild(removeBtn);
+
+            document.getElementById("goals").append(node);
+        }
+    </script>
+</body>
+
+</html>
